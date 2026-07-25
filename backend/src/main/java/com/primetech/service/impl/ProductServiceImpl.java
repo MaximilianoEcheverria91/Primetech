@@ -6,16 +6,20 @@ import com.primetech.dto.response.ProductResponse;
 import com.primetech.entity.Brand;
 import com.primetech.entity.Category;
 import com.primetech.entity.Product;
+import com.primetech.entity.ProductImage;
 import com.primetech.exception.ResourceNotFoundException;
 import com.primetech.repository.BrandRepository;
 import com.primetech.repository.CategoryRepository;
 import com.primetech.repository.ProductRepository;
+import com.primetech.service.CloudinaryService;
 import com.primetech.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,6 +31,7 @@ public class ProductServiceImpl implements ProductService {
     private final CategoryRepository categoryRepository;
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
+    private final CloudinaryService cloudinaryService;
 
     @Override
     public List<ProductResponse> getAllProducts() {
@@ -77,6 +82,35 @@ public class ProductServiceImpl implements ProductService {
         log.info("Producto creado exitosamente con ID asignado: {}", saveProduct.getId());
 
         return productMapper.toResponse(saveProduct);
+    }
+
+    @Transactional
+    public List<String> addImagesToProduct(Long productId, List<MultipartFile> files, int primaryIndex) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con el ID: " + productId));
+
+        List<String> uploadedUrls = new ArrayList<>();
+
+        for (int i = 0; i < files.size(); i++) {
+            MultipartFile file = files.get(i);
+
+            // 1. Subir a Cloudinary
+            String imageUrl = cloudinaryService.uploadFile(file, "products");
+            uploadedUrls.add(imageUrl);
+
+            // 2. Crear la entidad ProductImage
+            boolean isPrimary = (i == primaryIndex);
+            ProductImage productImage = ProductImage.builder()
+                    .url(imageUrl)
+                    .isPrimary(isPrimary)
+                    .product(product)
+                    .build();
+
+            product.getImages().add(productImage);
+        }
+
+        productRepository.save(product);
+        return uploadedUrls;
     }
 }
 
