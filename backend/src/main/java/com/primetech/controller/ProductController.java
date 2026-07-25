@@ -13,8 +13,10 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -68,6 +70,18 @@ public class ProductController {
         log.info("Petición HTTP recibida: GET /api/product/category/{}", categoryId);
         List<ProductResponse> product = productService.getProductByCategory(categoryId);
         return ResponseEntity.ok(product);
+    }
+
+    @Operation(summary = "Subir imágenes a un producto", description = "Sube una o varias imágenes a Cloudinary y las asocia a un producto existente")
+    @PostMapping(value = "/{productId}/images", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<List<String>> uploadProductImages(
+            @PathVariable Long productId,
+            @RequestParam("files") List<MultipartFile> files,
+            @RequestParam(value = "primaryIndex", defaultValue = "0") int primaryIndex) {
+
+        log.info("Petición recibida para subir {} imágenes al producto ID: {}", files.size(), productId);
+        List<String> imageUrls = productService.addImagesToProduct(productId, files, primaryIndex);
+        return ResponseEntity.status(HttpStatus.CREATED).body(imageUrls);
     }
 
     @Operation(summary = "Crear un nuevo producto", description = "Permite al administrador dar de alta un nuevo componente de hardware. Requiere datos válidos.")
