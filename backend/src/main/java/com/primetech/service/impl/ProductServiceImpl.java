@@ -34,9 +34,7 @@ public class ProductServiceImpl implements ProductService {
     private final CloudinaryService cloudinaryService;
 
     @Override
-    public List<ProductResponse> getAllProducts() {
-        return List.of();
-    }
+    public List<ProductResponse> getAllProducts() {return List.of();}
 
     @Override
     public ProductResponse getProductById(Long id) {
