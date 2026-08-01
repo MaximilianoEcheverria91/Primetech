@@ -19,4 +19,4 @@ spring:
     api-secret: ${CLOUDINARY_SECRET}
 
 server:
-  port: ${PORT}
+  port: ${PORT:8080}

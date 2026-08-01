@@ -123,6 +123,15 @@
 						<goals>
 							<goal>report</goal>
 						</goals>
+						<configuration>
+							<!-- Excluimos clases que no contienen lógica de negocio -->
+							<excludes>
+								<exclude>com/primetech/entity/**</exclude>
+								<exclude>com/primetech/dto/**</exclude>
+								<exclude>com/primetech/config/**</exclude>
+								<exclude>com/primetech/PrimetechApplication.class</exclude>
+							</excludes>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
