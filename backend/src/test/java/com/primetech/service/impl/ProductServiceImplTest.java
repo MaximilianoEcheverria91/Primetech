@@ -156,4 +156,23 @@ class ProductServiceImplTest {
 
         verify(productRepository, times(1)).save(product);
     }
+
+    @Test
+    @DisplayName("getAllProducts - Debe retornar la lista completa de productos mapeados a DTO")
+    void getAllProducts_ShouldReturnListOfProducts() {
+        // Arrange
+        when(productRepository.findAll()).thenReturn(List.of(sampleProduct));
+        when(productMapper.toResponse(sampleProduct)).thenReturn(sampleResponse);
+
+        // Act
+        List<ProductResponse> result = productService.getAllProducts();
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals("RTX 4070", result.get(0).name());
+        verify(productRepository, times(1)).findAll();
+    }
+
+
 }
