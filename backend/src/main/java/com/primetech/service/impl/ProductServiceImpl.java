@@ -34,7 +34,12 @@ public class ProductServiceImpl implements ProductService {
     private final CloudinaryService cloudinaryService;
 
     @Override
-    public List<ProductResponse> getAllProducts() {return List.of();}
+    public List<ProductResponse> getAllProducts() {
+        log.info("Obteniendo el listado completo de productos");
+        return  productRepository.findAll().stream()
+                .map(productMapper::toResponse)
+                .toList();
+    }
 
     @Override
     public ProductResponse getProductById(Long id) {
