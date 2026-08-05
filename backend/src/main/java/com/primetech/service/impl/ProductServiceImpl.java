@@ -34,6 +34,7 @@ public class ProductServiceImpl implements ProductService {
     private final CloudinaryService cloudinaryService;
 
     @Override
+    @Transactional(readOnly = true)
     public List<ProductResponse> getAllProducts() {
         log.info("Obteniendo el listado completo de productos");
         return  productRepository.findAll().stream()
@@ -42,19 +43,55 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public ProductResponse getProductById(Long id) {
-        return null;
+        log.info("Buscando producto con ID: {}", id);
+        return  productRepository.findById(id)
+                .map(productMapper::toResponse)
+                .orElseThrow(() -> {
+                    log.error("Error al buscar producto: El ID {} no existe", id);
+                    return new ResourceNotFoundException("Producto no encontrado con el ID: " + id);
+                });
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<ProductResponse> getOffers() {
-        return List.of();
+        log.info("Obteniendo listado de productos en ofertas (onSale = true)");
+        return productRepository.findByOnSaleTrue().stream()
+                .map(productMapper::toResponse)
+                .toList();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<ProductResponse> getProductByCategory(Integer categoryId) {
-        return List.of();
+        log.info("Buscando productos de la categoria ID: {}", categoryId);
+
+        if(!categoryRepository.existsById(categoryId)){
+            log.error("Error al buscar por categoria: La categoria con ID {} no existe", categoryId);
+            throw  new ResourceNotFoundException("La categoria especificada no existe.");
+        }
+        return productRepository.findByCategoryId(categoryId).stream()
+                .map(productMapper::toResponse)
+                .toList();
+
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<ProductResponse> getProductByBrand(Integer brandId) {
+        log.info("Buscando productos de la marcca con ID: {}", brandId);
+
+        if(!brandRepository.existsById(brandId)){
+            log.info("Error al buscar por marca: La marca con ID: {} no existe ", brandId);
+            throw new ResourceNotFoundException("La marca especificada no existe");
+        }
+        return productRepository.findByBrandId(brandId).stream()
+                .map(productMapper::toResponse)
+                .toList();
+    }
+
 
     @Override
     @Transactional

@@ -92,6 +92,41 @@ class ProductServiceImplTest {
     }
 
     @Test
+    @DisplayName("getAllProducts - Debe retornar la lista completa de productos mapeados a DTO")
+    void getAllProducts_ShouldReturnListOfProducts() {
+        // Arrange
+        when(productRepository.findAll()).thenReturn(List.of(sampleProduct));
+        when(productMapper.toResponse(sampleProduct)).thenReturn(sampleResponse);
+
+        // Act
+        List<ProductResponse> result = productService.getAllProducts();
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals("RTX 4070", result.get(0).name());
+        verify(productRepository, times(1)).findAll();
+    }
+
+
+    @Test
+    @DisplayName("getProductById - Debe retornar el producto mapeado cuando el ID existe")
+    void getProductById_Success() {
+        // Arrange
+        when(productRepository.findById(1L)).thenReturn(Optional.of(sampleProduct));
+        when(productMapper.toResponse(sampleProduct)).thenReturn(sampleResponse);
+
+        // Act
+        ProductResponse result = productService.getProductById(1L);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(1L, result.id());
+        assertEquals("RTX 4070", result.name());
+        verify(productRepository, times(1)).findById(1L);
+    }
+
+    @Test
     @DisplayName("Debe crear un producto con éxito cuando la Marca y Categoría existen")
     void createProduct_Success() {
         // Arrange (Simular respuestas de los repositorios y mapper)
@@ -156,23 +191,5 @@ class ProductServiceImplTest {
 
         verify(productRepository, times(1)).save(product);
     }
-
-    @Test
-    @DisplayName("getAllProducts - Debe retornar la lista completa de productos mapeados a DTO")
-    void getAllProducts_ShouldReturnListOfProducts() {
-        // Arrange
-        when(productRepository.findAll()).thenReturn(List.of(sampleProduct));
-        when(productMapper.toResponse(sampleProduct)).thenReturn(sampleResponse);
-
-        // Act
-        List<ProductResponse> result = productService.getAllProducts();
-
-        // Assert
-        assertNotNull(result);
-        assertEquals(1, result.size());
-        assertEquals("RTX 4070", result.get(0).name());
-        verify(productRepository, times(1)).findAll();
-    }
-
 
 }
