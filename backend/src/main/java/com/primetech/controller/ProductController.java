@@ -72,6 +72,18 @@ public class ProductController {
         return ResponseEntity.ok(product);
     }
 
+    @Operation(summary = "Filtrar productos por marca\", description = \"Recupera todos los componentes pertenecientes a una marca específica (ej: Intel)")
+    @ApiResponses(value= {
+            @ApiResponse(responseCode = "200", description = "Lista de productos filtrada con éxito"),
+            @ApiResponse(responseCode = "404", description = "La marca indicada no existe", content = @Content)
+    })
+    @GetMapping("/brand/{brandId}")
+    public ResponseEntity<List<ProductResponse>> getProductByBrand(@PathVariable Integer brandId) {
+        log.info("Petición HTTP recibida: GET /api/product/brand/{}", brandId);
+        List<ProductResponse> product = productService.getProductByBrand(brandId);
+        return ResponseEntity.ok(product);
+    }
+
     @Operation(summary = "Subir imágenes a un producto", description = "Sube una o varias imágenes a Cloudinary y las asocia a un producto existente")
     @PostMapping(value = "/{productId}/images", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<List<String>> uploadProductImages(

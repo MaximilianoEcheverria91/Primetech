@@ -16,6 +16,8 @@ public interface ProductService {
 
     List<ProductResponse> getProductByCategory(Integer categoryId);
 
+    List<ProductResponse> getProductByBrand(Integer brandId);
+
     ProductResponse createProduct(ProductRequest request);
 
     List<String> addImagesToProduct(Long productId, List<MultipartFile> files, int primaryIndex);
