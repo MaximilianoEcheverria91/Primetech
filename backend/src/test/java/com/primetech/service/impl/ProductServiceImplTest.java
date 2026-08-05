@@ -127,6 +127,111 @@ class ProductServiceImplTest {
     }
 
     @Test
+    @DisplayName("getProductById - Debe lanzar ResourceNotFoundException cuando el ID no existe")
+    void getProductById_NotFound_ThrowsException() {
+        // Arrange
+        when(productRepository.findById(99L)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        ResourceNotFoundException exception = assertThrows(
+                ResourceNotFoundException.class,
+                () -> productService.getProductById(99L)
+        );
+
+        assertEquals("Producto no encontrado con el ID: 99", exception.getMessage());
+        verify(productRepository, times(1)).findById(99L);
+    }
+
+    @Test
+    @DisplayName("getOffers - Debe retornar unicamente los productos con onSale = true")
+    void getOffers_ShouldReturnOnlyProductsOnSale() {
+        // Arrange
+        when(productRepository.findByOnSaleTrue()).thenReturn(List.of(sampleProduct));
+        when(productMapper.toResponse(sampleProduct)).thenReturn(sampleResponse);
+
+        // Act
+        List<ProductResponse> result = productService.getOffers();
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertTrue(result.get(0).onSale());
+        verify(productRepository, times(1)).findByOnSaleTrue();
+    }
+
+    @Test
+    @DisplayName("getProductByCategory - Debe retornar productos filtrados por categoria valida")
+    void getProductByCategory_Success() {
+        // Arrange
+        Integer categoryId = 1;
+        when(categoryRepository.existsById(categoryId)).thenReturn(true);
+        when(productRepository.findByCategoryId(categoryId)).thenReturn(List.of(sampleProduct));
+        when(productMapper.toResponse(sampleProduct)).thenReturn(sampleResponse);
+
+        // Act
+        List<ProductResponse> result = productService.getProductByCategory(categoryId);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        verify(categoryRepository, times(1)).existsById(categoryId);
+        verify(productRepository, times(1)).findByCategoryId(categoryId);
+    }
+
+    @Test
+    @DisplayName("getProductByCategory - Debe lanzar ResourceNotFoundException si la categoria no existe")
+    void getProductByCategory_CategoryNotFound_ThrowsException() {
+        // Arrange
+        Integer categoryId = 99;
+        when(categoryRepository.existsById(categoryId)).thenReturn(false);
+
+        // Act & Assert
+        ResourceNotFoundException exception = assertThrows(
+                ResourceNotFoundException.class,
+                () -> productService.getProductByCategory(categoryId)
+        );
+
+        assertEquals("La categoria especificada no existe.", exception.getMessage());
+        verify(categoryRepository, times(1)).existsById(categoryId);
+        verify(productRepository, never()).findByCategoryId(anyInt());
+    }
+
+    @Test
+    @DisplayName("getProductByBrand - Debe retornar productos filtrados por marca valida")
+    void getProductByBrand_Success(){
+        Integer brandId = 1;
+
+        when(brandRepository.existsById(brandId)).thenReturn(true);
+        when(productRepository.findByBrandId(brandId)).thenReturn(List.of(sampleProduct));
+        when(productMapper.toResponse(sampleProduct)).thenReturn(sampleResponse);
+
+        List<ProductResponse> result = productService.getProductByBrand(brandId);
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        verify(brandRepository, times(1)).existsById(brandId);
+        verify(productRepository,times(1)).findByBrandId(anyInt());
+    }
+
+    @Test
+    @DisplayName("getProductByBrand - Debe lanzar ResourceNotFoundException si la marca no existe")
+    void getProductByBrand_BrandNotFound_ThrowsException(){
+
+        Integer brandId = 56;
+
+        when(brandRepository.existsById(brandId)).thenReturn(false);
+
+        ResourceNotFoundException resourceNotFoundException = assertThrows(
+                ResourceNotFoundException.class,
+                () -> productService.getProductByBrand(brandId)
+        );
+
+        assertEquals("La marca especificada no existe", resourceNotFoundException.getMessage());
+        verify(brandRepository,times(1)).existsById(brandId);
+        verify(productRepository, never()).findByBrandId(anyInt());
+    }
+
+    @Test
     @DisplayName("Debe crear un producto con éxito cuando la Marca y Categoría existen")
     void createProduct_Success() {
         // Arrange (Simular respuestas de los repositorios y mapper)
