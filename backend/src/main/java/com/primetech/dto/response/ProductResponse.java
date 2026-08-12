@@ -3,6 +3,7 @@ package com.primetech.dto.response;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Schema(description = "Respuesta del producto")
 public record ProductResponse(
@@ -38,5 +39,8 @@ public record ProductResponse(
       Integer categoryId,
 
       @Schema(description = "Nombre de la categoría", example = "Monitor")
-      String categoryName
+      String categoryName,
+
+      @Schema(description = "Lista de las imagenes del producto", example = "https://res.cloudinary.com/dxetioest/image/upload/v1785898228/primetech/products/file_y7imyz.png")
+      List<ProductImageResponse> images
 ) {}
