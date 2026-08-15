@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import type { ProductResponse } from '../../types/product.type';
 import { formatCurrency } from '../../utils/formatCurrency';
 
@@ -15,7 +16,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <div className="bg-[#0A1A2F] border border-[#0C6A6F] rounded-xl overflow-hidden flex flex-col justify-between transition-all duration-300 hover:shadow-[0_0_15px_rgba(0,208,255,0.25)] group">
       {/* Imagen + Badge Oferta */}
-      <div className="relative bg-white p-4 flex items-center justify-center min-h-[220px]">
+      <Link to={`/product/${product.id}`} className="relative bg-white p-4 flex items-center justify-center min-h-[220px] cursor-pointer">
         <img 
           src={primaryImage} 
           alt={product.name} 
@@ -30,14 +31,16 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             -15%
           </div>
         )}
-      </div>
+      </Link>
 
       {/* Contenido de la Card */}
       <div className="p-4 flex flex-col flex-grow justify-between">
         <div>
+          <Link to={`/product/${product.id}`} className="hover:text-white transition-colors">
           <h3 className="text-[#CBCED4] text-sm font-normal line-clamp-2 min-h-[40px] mb-2">
             {product.name}
           </h3>
+          </Link>
 
           {/* Precios */}
           <div className="mb-2">
@@ -69,11 +72,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         </div>
 
         {/* Acciones */}
-        <div className="mt-2 space-y-2">
-          <button className="text-[#31A7A7] text-xs font-semibold hover:underline block w-full text-left">
-            VER DETALLE...
-          </button>
-          
+        <div className="mt-2 space-y-2">          
           <button 
             disabled={isOutOfStock}
             className={`w-full py-2 rounded-lg text-black font-semibold text-sm transition-colors ${
