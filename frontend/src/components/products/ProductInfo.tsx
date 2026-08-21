@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import type { ProductResponse } from '../../types/product.type';
 import { formatCurrency } from '../../utils/formatCurrency';
+import { useCart } from '../../contexts/CartContext';
 import {
   Star,
   Truck,
@@ -18,6 +20,8 @@ interface ProductInfoProps {
 }
 
 export const ProductInfo = ({ product }: ProductInfoProps) => {
+  const { addToCart } = useCart();
+  const navigate = useNavigate();
   const [quantity, setQuantity] = useState<number>(1);
   const isOutOfStock = product.stock <= 0;
 
@@ -153,6 +157,7 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
 
           {/* Add to Cart Button */}
           <button
+            onClick={() => addToCart(product, quantity)}
             disabled={isOutOfStock}
             className={`flex-grow flex items-center justify-center gap-2 py-3 px-6 rounded-xl font-bold text-white text-sm transition-all duration-200 shadow-lg ${
               isOutOfStock
@@ -175,6 +180,10 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
 
         {/* Buy Now Button */}
         <button
+          onClick={() => {
+            addToCart(product, quantity);
+            navigate('/cart');
+          }}
           disabled={isOutOfStock}
           className="w-full py-3 border border-blue-600 bg-[#071322] hover:bg-blue-600/20 text-white font-bold text-sm tracking-wider rounded-xl transition-all uppercase disabled:opacity-50 disabled:cursor-not-allowed"
         >

@@ -1,10 +1,13 @@
 import { Search, Sun, User, ShoppingCart } from 'lucide-react';
 import { useState } from 'react';
-import logoIcon from '../../assets/logo_icon.png';
-import logoText from '../../assets/logo_text.png';
+import { Link } from 'react-router-dom';
+import { useCart } from '../contexts/CartContext';
+import logoIcon from '../assets/logo_icon.png';
+import logoText from '../assets/logo_text.png';
 
 export const Navbar = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
+  const { totalItems } = useCart();
 
   
 
@@ -48,9 +51,14 @@ export const Navbar = () => {
             <span>Iniciar sesión</span>
           </button>
 
-          <button className="relative p-1">
+          <Link to="/cart" className="relative p-1 hover:text-[#00BBFF] transition-colors" aria-label="Ver carrito">
             <ShoppingCart className="w-6 h-6" />
-          </button>
+            {totalItems > 0 && (
+              <span className="absolute -top-1 -right-1.5 bg-[#4AB94E] text-black text-[11px] font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-md animate-scaleIn">
+                {totalItems}
+              </span>
+            )}
+          </Link>
         </div>
       </div>
 

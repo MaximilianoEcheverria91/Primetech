@@ -1,5 +1,5 @@
-import { Navbar } from '../components/layout/Navbar';
-import { Footer } from '../components/layout/Footer';
+import { Navbar } from '../layouts/Navbar';
+import { Footer } from '../layouts/Footer';
 import { FilterSidebar } from '../components/filters/FilterSidebar';
 import { ProductGrid } from '../components/products/ProductGrid';
 import { useProducts } from '../hooks/useProducts';
