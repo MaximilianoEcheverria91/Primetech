@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/products/ProductGrid.tsx</title>
+    <title>Code coverage report for components/cart/ClearCartModal.tsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/products</a> ProductGrid.tsx</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/cart</a> ClearCartModal.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>6/6</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
-                <span class="quiet">Functions</span>
                 <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>1/1</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
@@ -115,9 +115,7 @@
 <a name='L50'></a><a href='#L50'>50</a>
 <a name='L51'></a><a href='#L51'>51</a>
 <a name='L52'></a><a href='#L52'>52</a>
-<a name='L53'></a><a href='#L53'>53</a>
-<a name='L54'></a><a href='#L54'>54</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L53'></a><a href='#L53'>53</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -127,32 +125,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -163,61 +136,85 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { ProductCard } from './ProductCard';
-import type { ProductResponse } from '../../types/product.type';
-import { Loader2 } from 'lucide-react';
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { AlertTriangle } from 'lucide-react';
+import { Button } from '../common/Button';
 &nbsp;
-interface ProductGridProps {
-  products: ProductResponse[];
-  loading: boolean;
-  error: string | null;
+interface ClearCartModalProps {
+  isOpen: boolean;
+  onClose: () =&gt; void;
+  onConfirm: () =&gt; void;
 }
 &nbsp;
-export const ProductGrid = ({ products, loading, error }: ProductGridProps) =&gt; {
-  if (loading) {
-    return (
-      &lt;div className="flex flex-col items-center justify-center min-h-[400px]"&gt;
-        &lt;Loader2 className="w-12 h-12 text-pt-secondary animate-spin mb-4" /&gt;
-        &lt;p className="text-pt-text-main"&gt;Cargando catálogo de productos...&lt;/p&gt;
-      &lt;/div&gt;
-    );
-  }
-&nbsp;
-  if (error) {
-    return (
-      &lt;div className="flex flex-col items-center justify-center min-h-[400px] p-6 text-center border-2 border-dashed border-red-500/50 rounded-xl"&gt;
-        &lt;p className="text-red-400 text-lg mb-2"&gt;Ocurrió un error al cargar los productos&lt;/p&gt;
-        &lt;p className="text-pt-text-muted"&gt;{error}&lt;/p&gt;
-      &lt;/div&gt;
-    );
-  }
-&nbsp;
-  if (products.length === 0) {
-    return (
-      &lt;div className="flex flex-col items-center justify-center min-h-[400px] p-6 text-center border-2 border-dashed border-pt-border/50 rounded-xl"&gt;
-        &lt;p className="text-pt-text-main text-lg"&gt;No se encontraron productos.&lt;/p&gt;
-        &lt;p className="text-pt-text-muted"&gt;Intenta ajustando tus filtros.&lt;/p&gt;
-      &lt;/div&gt;
-    );
-  }
+export const ClearCartModal = ({ isOpen, onClose, onConfirm }: ClearCartModalProps) =&gt; {
+  if (!isOpen) return null;
 &nbsp;
   return (
-    &lt;div className="w-full"&gt;
-      &lt;div className="mb-6"&gt;
-        &lt;h2 className="text-2xl font-semibold text-pt-text-pure mb-1"&gt;Productos disponibles&lt;/h2&gt;
-        &lt;p className="text-pt-text-muted"&gt;{products.length} Productos encontrados&lt;/p&gt;
-      &lt;/div&gt;
-      
-      &lt;div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"&gt;
-        {products.map((product) =&gt; (
-          &lt;ProductCard key={product.id} product={product} /&gt;
-        ))}
+    &lt;div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fadeIn"&gt;
+      &lt;div className="bg-[#0A1A2F] border border-[#0C6A6F] rounded-2xl p-6 md:p-8 max-w-md w-full flex flex-col items-center text-center gap-5 shadow-2xl relative"&gt;
+        
+        {/* Ícono de Advertencia Hexagonal / Ámbar */}
+        &lt;div className="w-16 h-16 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-500 shadow-[0_0_15px_rgba(245,158,11,0.2)]"&gt;
+          &lt;AlertTriangle className="w-10 h-10" /&gt;
+        &lt;/div&gt;
+&nbsp;
+        {/* Texto principal */}
+        &lt;div className="space-y-2"&gt;
+          &lt;h3 className="text-xl font-bold text-white"&gt;
+            ¿Estás seguro de que deseas vaciar tu carrito?
+          &lt;/h3&gt;
+          &lt;p className="text-xs md:text-sm text-[#A3A1A1]"&gt;
+            Esta acción eliminará todos los productos seleccionados y no se podrá deshacer.
+          &lt;/p&gt;
+        &lt;/div&gt;
+&nbsp;
+        {/* Botones de acción */}
+        &lt;div className="flex items-center justify-center gap-4 w-full mt-2"&gt;
+          &lt;Button
+            variant="outline"
+            onClick={onClose}
+            className="flex-1 py-3 text-sm"
+          &gt;
+            NO, CANCELAR
+          &lt;/Button&gt;
+          &lt;Button
+            variant="danger"
+            onClick={onConfirm}
+            className="flex-1 py-3 text-sm uppercase tracking-wide"
+          &gt;
+            SÍ, VACIAR
+          &lt;/Button&gt;
+        &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
   );

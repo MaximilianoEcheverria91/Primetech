@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import { ProductCard } from './ProductCard';
+import { CartProvider } from '../../contexts/CartContext';
 import type { ProductResponse } from '../../types/product.type';
 
 const mockProduct: ProductResponse = {
@@ -17,18 +18,20 @@ const mockProduct: ProductResponse = {
   brandName: 'Nvidia',
   categoryId: 1,
   categoryName: 'Placas de Video',
-  images: [
-    { id: 1, url: 'https://example.com/rtx4070.jpg', isPrimary: true },
-  ],
+  images: [{ id: 1, url: 'https://example.com/rtx4070.jpg', isPrimary: true }],
 };
 
-const renderWithRouter = (ui: React.ReactElement) => {
-  return render(<MemoryRouter>{ui}</MemoryRouter>);
+const renderWithProviders = (ui: React.ReactElement) => {
+  return render(
+    <MemoryRouter>
+      <CartProvider>{ui}</CartProvider>
+    </MemoryRouter>
+  );
 };
 
 describe('ProductCard Component', () => {
   it('debe renderizar el nombre, precio y stock del producto correctamente', () => {
-    renderWithRouter(<ProductCard product={mockProduct} />);
+    renderWithProviders(<ProductCard product={mockProduct} />);
 
     expect(screen.getByText('Placa de Video RTX 4070')).toBeInTheDocument();
     expect(screen.getByText(/Stock disponible \(10\)/i)).toBeInTheDocument();
@@ -39,7 +42,7 @@ describe('ProductCard Component', () => {
   });
 
   it('debe mostrar el badge de descuento cuando el producto está en oferta (onSale = true)', () => {
-    renderWithRouter(<ProductCard product={mockProduct} />);
+    renderWithProviders(<ProductCard product={mockProduct} />);
 
     expect(screen.getByText('-15%')).toBeInTheDocument();
   });
@@ -51,10 +54,9 @@ describe('ProductCard Component', () => {
       status: 'OUT_OF_STOCK',
     };
 
-    renderWithRouter(<ProductCard product={outOfStockProduct} />);
+    renderWithProviders(<ProductCard product={outOfStockProduct} />);
 
     expect(screen.getByText(/Sin Stock/i)).toBeInTheDocument();
-
     const button = screen.getByRole('button', { name: /agregar al carrito/i });
     expect(button).toBeDisabled();
   });
