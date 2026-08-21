@@ -1,6 +1,8 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
+import { MemoryRouter } from 'react-router-dom';
 import { ProductInfo } from './ProductInfo';
+import { CartProvider } from '../../contexts/CartContext';
 import type { ProductResponse } from '../../types/product.type';
 
 const mockProduct: ProductResponse = {
@@ -16,11 +18,20 @@ const mockProduct: ProductResponse = {
   brandName: 'Samsung',
   categoryId: 6,
   categoryName: 'Monitores',
+  images: [],
+};
+
+const renderWithProviders = (ui: React.ReactElement) => {
+  return render(
+    <MemoryRouter>
+      <CartProvider>{ui}</CartProvider>
+    </MemoryRouter>
+  );
 };
 
 describe('ProductInfo Component', () => {
   it('debe renderizar el nombre, marca, precio y cálculo de cuotas', () => {
-    render(<ProductInfo product={mockProduct} />);
+    renderWithProviders(<ProductInfo product={mockProduct} />);
 
     expect(screen.getByText('Samsung')).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Samsung Odyssey G4' })).toBeInTheDocument();
@@ -29,7 +40,7 @@ describe('ProductInfo Component', () => {
   });
 
   it('debe incrementar y decrementar la cantidad respetando límites', () => {
-    render(<ProductInfo product={mockProduct} />);
+    renderWithProviders(<ProductInfo product={mockProduct} />);
 
     const decreaseBtn = screen.getByRole('button', { name: /disminuir cantidad/i });
     const increaseBtn = screen.getByRole('button', { name: /aumentar cantidad/i });
@@ -44,7 +55,7 @@ describe('ProductInfo Component', () => {
 
   it('debe deshabilitar botones de compra cuando no hay stock', () => {
     const outOfStock: ProductResponse = { ...mockProduct, stock: 0, status: 'OUT_OF_STOCK' };
-    render(<ProductInfo product={outOfStock} />);
+    renderWithProviders(<ProductInfo product={outOfStock} />);
 
     expect(screen.getByText(/sin stock disponible/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /agregar al carrito/i })).toBeDisabled();

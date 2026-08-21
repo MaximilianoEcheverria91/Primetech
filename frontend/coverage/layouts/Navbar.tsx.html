@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/filters/FilterSidebar.tsx</title>
+    <title>Code coverage report for layouts/Navbar.tsx</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../prettify.css" />
-    <link rel="stylesheet" href="../../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../../sort-arrow-sprite.png);
+            background-image: url(../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/filters</a> FilterSidebar.tsx</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">layouts</a> Navbar.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.33% </span>
+                <span class="strong">80% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/6</span>
+                <span class='fraction'>4/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>7/10</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/3</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.33% </span>
+                <span class="strong">80% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/6</span>
+                <span class='fraction'>4/5</span>
             </div>
         
             
@@ -147,19 +147,17 @@
 <a name='L82'></a><a href='#L82'>82</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -172,7 +170,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -222,89 +225,86 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { ChevronDown, Filter } from 'lucide-react';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Search, Sun, User, ShoppingCart } from 'lucide-react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useCart } from '../contexts/CartContext';
+import logoIcon from '../assets/logo_icon.png';
+import logoText from '../assets/logo_text.png';
 &nbsp;
-export const FilterSidebar = () =&gt; {
-  const [openCategory, setOpenCategory] = useState&lt;string | null&gt;('Computadoras');
-  const [openSubcategory, setOpenSubcategory] = useState&lt;string | null&gt;('Amd');
+export const Navbar = () =&gt; {
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const { totalItems } = useCart();
+&nbsp;
+  
 &nbsp;
   return (
-    &lt;aside className="w-full lg:w-[280px] bg-[#1E293B] rounded-xl p-5 border border-slate-700/50 text-[#CBCED4]"&gt;
-      {/* Header */}
-      &lt;div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-700"&gt;
-        &lt;Filter className="w-5 h-5 text-[#00BBFF]" /&gt;
-        &lt;h2 className="text-xl font-medium text-[#CBCED4]"&gt;Filtros&lt;/h2&gt;
-        &lt;ChevronDown className="w-5 h-5 ml-auto text-[#CBCED4]" /&gt;
-      &lt;/div&gt;
+    &lt;header className="w-full bg-[#0F172A] border-b border-[#0C6A6F]/30 sticky top-0 z-50"&gt;
+      &lt;div className="container mx-auto px-4 h-20 flex items-center justify-between gap-6"&gt;
+        
+        {/* LOGO RESPONSIVO */}
+        &lt;div className="flex items-center gap-3 cursor-pointer flex-shrink-0"&gt;
+          &lt;img 
+            src={logoIcon} 
+            alt="PrimeTech Icon" 
+            className="h-18 w-25 object-contain hover:scale-105 transition-transform duration-300" 
+          /&gt;
+          &lt;img 
+            src={logoText} 
+            alt="PrimeTech" 
+            className="h-25 w-auto object-contain hidden md:block hover:scale-105 transition-transform duration-300" 
+          /&gt;
+        &lt;/div&gt;
 &nbsp;
-      {/* Categorias */}
-      &lt;div className="mb-6"&gt;
-        &lt;h3 className="text-base font-medium text-[#CBCED4] mb-4"&gt;Categorias&lt;/h3&gt;
-        &lt;ul className="space-y-3 text-sm"&gt;
-          &lt;li className="flex items-center gap-3 cursor-pointer"&gt;
-            &lt;input type="radio" name="category" className="w-4 h-4 accent-[#16969F] bg-black" /&gt;
-            &lt;span&gt;Todos&lt;/span&gt;
-          &lt;/li&gt;
+        {/* Search */}
+        &lt;div className="flex-grow max-w-xl relative hidden md:block"&gt;
+          &lt;Search className="h-4 w-4 text-[#CBCED4] absolute left-3 top-1/2 -translate-y-1/2" /&gt;
+          &lt;input
+            type="text"
+            className="w-full pl-9 pr-3 py-2 border border-[#0C6A6F] rounded-lg bg-[#0A1A2F] text-white placeholder-[#CBCED4]/60 text-sm outline-none focus:border-[#00BBFF]"
+            placeholder="Buscar productos"
+          /&gt;
+        &lt;/div&gt;
 &nbsp;
-          &lt;li&gt;
-            &lt;div 
-              className="flex items-center gap-3 cursor-pointer"
-              onClick={() =&gt; setOpenCategory(openCategory === 'Computadoras' ? null : <span class="branch-1 cbranch-no" title="branch not covered" >'Computadoras')</span>}
-            &gt;
-              &lt;input type="radio" name="category" defaultChecked className="w-4 h-4 accent-[#16969F]" /&gt;
-              &lt;span className="text-white font-medium"&gt;Computadoras&lt;/span&gt;
-              &lt;ChevronDown className={`w-4 h-4 ml-auto transition-transform ${openCategory === 'Computadoras' ? 'rotate-180' : ''}`} /&gt;
-            &lt;/div&gt;
+        {/* Actions */}
+        &lt;div className="flex items-center gap-5 text-sm text-white"&gt;
+          &lt;button <span class="fstat-no" title="function not covered" >onClick={() =&gt; <span class="cstat-no" title="statement not covered" >s</span>etIsDarkMode(!isDarkMode)} c</span>lassName="flex items-center gap-2 hover:opacity-80"&gt;
+            &lt;Sun className="w-5 h-5" /&gt;
+            &lt;span className="hidden lg:block"&gt;Modo claro&lt;/span&gt;
+          &lt;/button&gt;
 &nbsp;
-            {openCategory === 'Computadoras' &amp;&amp; (
-              &lt;ul className="pl-6 mt-3 space-y-3 border-l border-slate-700 ml-2"&gt;
-                &lt;li className="flex items-center gap-3"&gt;&lt;input type="radio" name="sub" className="w-3.5 h-3.5 accent-[#16969F]" /&gt;&lt;span&gt;Todos&lt;/span&gt;&lt;/li&gt;
-                &lt;li className="flex items-center gap-3"&gt;&lt;input type="radio" name="sub" className="w-3.5 h-3.5 accent-[#16969F]" /&gt;&lt;span&gt;Intel&lt;/span&gt;&lt;/li&gt;
-                &lt;li&gt;
-                  &lt;div className="flex items-center gap-3 cursor-pointer" <span class="fstat-no" title="function not covered" >onClick={() =&gt; <span class="cstat-no" title="statement not covered" >s</span>etOpenSubcategory(openSubcategory === 'Amd' ? null : 'Amd')}&gt;</span>
-                    &lt;input type="radio" name="sub" defaultChecked className="w-3.5 h-3.5 accent-[#16969F]" /&gt;
-                    &lt;span&gt;Amd&lt;/span&gt;
-                  &lt;/div&gt;
-                  {openSubcategory === 'Amd' &amp;&amp; (
-                    &lt;ul className="pl-6 mt-3 space-y-2 border-l border-slate-700 ml-2 text-xs"&gt;
-                      &lt;li className="flex items-center gap-2"&gt;&lt;input type="radio" name="amd" defaultChecked className="accent-[#16969F]" /&gt;&lt;span className="text-[#00BBFF]"&gt;Todos&lt;/span&gt;&lt;/li&gt;
-                      &lt;li className="flex items-center gap-2"&gt;&lt;input type="radio" name="amd" className="accent-[#16969F]" /&gt;&lt;span&gt;Gama Baja&lt;/span&gt;&lt;/li&gt;
-                      &lt;li className="flex items-center gap-2"&gt;&lt;input type="radio" name="amd" className="accent-[#16969F]" /&gt;&lt;span&gt;Gama Media&lt;/span&gt;&lt;/li&gt;
-                      &lt;li className="flex items-center gap-2"&gt;&lt;input type="radio" name="amd" className="accent-[#16969F]" /&gt;&lt;span&gt;Gama Alta&lt;/span&gt;&lt;/li&gt;
-                      &lt;li className="flex items-center gap-2"&gt;&lt;input type="radio" name="amd" className="accent-[#16969F]" /&gt;&lt;span&gt;Gama Prime&lt;/span&gt;&lt;/li&gt;
-                    &lt;/ul&gt;
-                  )}
-                &lt;/li&gt;
-              &lt;/ul&gt;
+          &lt;button className="flex items-center gap-2 border border-[#0C6A6F] bg-[#0A1A2F] rounded-full px-4 py-1.5 hover:border-[#00BBFF]"&gt;
+            &lt;User className="w-4 h-4" /&gt;
+            &lt;span&gt;Iniciar sesión&lt;/span&gt;
+          &lt;/button&gt;
+&nbsp;
+          &lt;Link to="/cart" className="relative p-1 hover:text-[#00BBFF] transition-colors" aria-label="Ver carrito"&gt;
+            &lt;ShoppingCart className="w-6 h-6" /&gt;
+            {totalItems &gt; 0 &amp;&amp; (
+              &lt;span className="absolute -top-1 -right-1.5 bg-[#4AB94E] text-black text-[11px] font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-md animate-scaleIn"&gt;
+                {totalItems}
+              &lt;/span&gt;
             )}
-          &lt;/li&gt;
-&nbsp;
-          &lt;li className="flex items-center gap-3"&gt;&lt;input type="radio" name="category" className="w-4 h-4 accent-[#16969F]" /&gt;&lt;span&gt;Notebook&lt;/span&gt;&lt;/li&gt;
-          &lt;li className="flex items-center gap-3"&gt;&lt;input type="radio" name="category" className="w-4 h-4 accent-[#16969F]" /&gt;&lt;span&gt;Perifericos&lt;/span&gt;&lt;/li&gt;
-          &lt;li className="flex items-center gap-3"&gt;&lt;input type="radio" name="category" className="w-4 h-4 accent-[#16969F]" /&gt;&lt;span&gt;Consolas&lt;/span&gt;&lt;/li&gt;
-          &lt;li className="flex items-center gap-3"&gt;&lt;input type="radio" name="category" className="w-4 h-4 accent-[#16969F]" /&gt;&lt;span&gt;Ofertas&lt;/span&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/div&gt;
-&nbsp;
-      {/* Rango de Precios */}
-      &lt;div className="pt-4 border-t border-slate-700"&gt;
-        &lt;h3 className="text-base font-medium text-[#CBCED4] mb-3"&gt;Rango de Precios&lt;/h3&gt;
-        &lt;div className="space-y-3 text-xs"&gt;
-          &lt;div&gt;
-            &lt;label className="block mb-1"&gt;Mínimo&lt;/label&gt;
-            &lt;input type="number" defaultValue={0} className="w-full bg-[#0A1A2F] border border-[#0C6A6F] text-white rounded px-3 py-1.5 outline-none" /&gt;
-          &lt;/div&gt;
-          &lt;div&gt;
-            &lt;label className="block mb-1"&gt;Máximo&lt;/label&gt;
-            &lt;input type="number" defaultValue={0} className="w-full bg-[#0A1A2F] border border-[#0C6A6F] text-white rounded px-3 py-1.5 outline-none" /&gt;
-          &lt;/div&gt;
+          &lt;/Link&gt;
         &lt;/div&gt;
       &lt;/div&gt;
-    &lt;/aside&gt;
+&nbsp;
+      {/* Submenu */}
+      &lt;div className="bg-[#0F172A] border-t border-slate-800"&gt;
+        &lt;div className="container mx-auto px-4 h-11 flex items-center gap-6 text-sm text-[#CBCED4]"&gt;
+          &lt;a href="#" className="hover:text-white"&gt;Arma tu PC&lt;/a&gt;
+          &lt;a href="#" className="hover:text-white"&gt;Computadoras&lt;/a&gt;
+          &lt;a href="#" className="hover:text-white"&gt;Notebook&lt;/a&gt;
+          &lt;a href="#" className="hover:text-white"&gt;Perifericos&lt;/a&gt;
+          &lt;a href="#" className="hover:text-white"&gt;Consolas&lt;/a&gt;
+          &lt;a href="#" className="hover:text-white"&gt;Accesorios&lt;/a&gt;
+          
+          &lt;a href="#" className="ml-auto bg-gradient-to-r from-[#28E1F5] to-[#585AB5] text-white px-5 py-1 rounded-full font-semibold text-xs shadow-[0_0_10px_rgba(40,225,245,0.3)]"&gt;
+            Ofertas
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/header&gt;
   );
 };</pre></td></tr></table></pre>
 
@@ -315,14 +315,14 @@ export const FilterSidebar = () =&gt; {
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
                 at 2026-08-21T05:22:21.673Z
             </div>
-        <script src="../../prettify.js"></script>
+        <script src="../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../../sorter.js"></script>
-        <script src="../../block-navigation.js"></script>
+        <script src="../sorter.js"></script>
+        <script src="../block-navigation.js"></script>
     </body>
 </html>
     
