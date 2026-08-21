@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom';
 import type { ProductResponse } from '../../types/product.type';
 import { formatCurrency } from '../../utils/formatCurrency';
+import { useCart } from '../../contexts/CartContext';
 
 interface ProductCardProps {
   product: ProductResponse;
 }
 
 export const ProductCard = ({ product }: ProductCardProps) => {
+  const { addToCart } = useCart();
   const isOutOfStock = product.stock <= 0 || product.status === 'OUT_OF_STOCK';
   const primaryImage = 
     product.images?.find(img => img.isPrimary)?.url || 
@@ -49,7 +51,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
                 {formatCurrency(product.price * 1.15)}
               </span>
             )}
-            <span className="text-white text-2xl font-bold">
+            <span className="text-white text-2xl font-bold color-[rgb(0, 212, 255)]">
               {formatCurrency(product.price)}
             </span>
           </div>
@@ -74,6 +76,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         {/* Acciones */}
         <div className="mt-2 space-y-2">          
           <button 
+            onClick={() => addToCart(product)}
             disabled={isOutOfStock}
             className={`w-full py-2 rounded-lg text-black font-semibold text-sm transition-colors ${
               isOutOfStock 

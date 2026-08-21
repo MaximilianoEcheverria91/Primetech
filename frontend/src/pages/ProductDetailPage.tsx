@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
-import { Navbar } from '../components/layout/Navbar';
-import { Footer } from '../components/layout/Footer';
+import { Navbar } from '../layouts/Navbar';
+import { Footer } from '../layouts/Footer';
 import { ProductGallery } from '../components/products/ProductGallery';
 import { ProductInfo } from '../components/products/ProductInfo';
 import { ProductDescription } from '../components/products/ProductDescription';
